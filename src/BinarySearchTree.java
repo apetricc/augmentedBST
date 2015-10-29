@@ -67,14 +67,41 @@ public class BinarySearchTree {
         else // look in right subtree for order statistic i - r
             return SELECT(x.right, i - r)
      */
-    private BSTNode select(BSTNode x, int i) {
+    public BSTNode select(BSTNode x, int i) {
         int r = x.getLeft().getSize() + 1;
         if (i == r) return x;
         else if (i < r) return select(x.getLeft(), i);
         else return select(x.getRight(), i - r);
     }
 
-
+/**
+ * RANK(T, x) // find the rank of node x in tree T.   x is a handle.
+ *      r = x.left.size + 1 // rank of x in x's subtree
+ *      y = x  // y starts at x, and goes up a path towards the root
+ *      while (y != T.root){ // walk a path from x to the root
+ *          if (y == y.p.right) { // if y is a right child
+ *              r = r + y.p.left.size + 1  // account for y's new left subtree
+ *          }
+ *          y = y.p
+ *      }
+ *  */
+    public int rank(BinarySearchTree T, BSTNode x) {
+        int r;
+        /**
+        if (x.getLeft() != null) {
+            r = x.getLeft().getSize() + 1;
+        } else r = 1;
+        **/
+        r = x.getLeft().getSize() + 1;
+        BSTNode y = x;
+        while (y != T.root) {
+            if (y == y.getP().getRight()) {
+                r = r + y.getP().getLeft().getSize() + 1;
+            }
+        y = y.getP();
+        }
+        return r;
+    }
 
 
 

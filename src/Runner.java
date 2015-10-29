@@ -47,7 +47,7 @@ public class Runner {
      * In main we are to test the BinarySearchTree class, and the bstSort function.
      */
     public static void main(String[] args) {
-        int[] arr = {20, 15, 23, 5, 7, 9, 4,11};  //, 16, 11, 25, 24, 30, 33, 29, 3, 2, 19, 36, 22, 28
+        int[] arr = {5,6,7,4,3,2,1};  //, 16, 11, 25, 24, 30, 33, 29, 3, 2, 19, 36, 22, 28
         System.out.println("Here is the initial array: \n" + arrayPrinter(arr));
 
         BinarySearchTree newTree = new BinarySearchTree();
@@ -57,10 +57,11 @@ public class Runner {
 
 
         newTree.getSize();
-        System.out.println("Get size did this: " + newTree.search(20).getSize());
-        System.out.println("Get size did this: " + newTree.search(20).getLeft().getSize());
-        newTree.delete(newTree.search(9));
-        System.out.println("Get size did this: " + newTree.search(20).getSize());
+        System.out.println("Get size did this: " + newTree.search(5).getSize());
+        System.out.println("Get size did this: " + newTree.search(2).getSize());
+        newTree.delete(newTree.search(1));
+        System.out.println("Get size did this: " + newTree.search(2).getSize());
+        System.out.println("Rank of node with key 2 is: " + newTree.rank(newTree, newTree.search(2)));
 
     }//main
 
