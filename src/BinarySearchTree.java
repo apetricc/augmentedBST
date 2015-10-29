@@ -68,7 +68,10 @@ public class BinarySearchTree {
             return SELECT(x.right, i - r)
      */
     public BSTNode select(BSTNode x, int i) {
-        int r = x.getLeft().getSize() + 1;
+        int r;
+        if (x.getLeft() != null) {  // check that x actually HAS a left child
+            r = x.getLeft().getSize() + 1;
+        } else r = 1;   // if x doesn't have a left child it should become ??  1? need to check what select is supposed to do
         if (i == r) return x;
         else if (i < r) return select(x.getLeft(), i);
         else return select(x.getRight(), i - r);
@@ -87,12 +90,10 @@ public class BinarySearchTree {
  *  */
     public int rank(BinarySearchTree T, BSTNode x) {
         int r;
-        /**
-        if (x.getLeft() != null) {
+
+        if (x.getLeft() != null) { //if x has left child
             r = x.getLeft().getSize() + 1;
-        } else r = 1;
-        **/
-        r = x.getLeft().getSize() + 1;
+        } else r = 1;  // if x has no left child
         BSTNode y = x;
         while (y != T.root) {
             if (y == y.getP().getRight()) {
