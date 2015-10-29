@@ -47,7 +47,7 @@ public class Runner {
      * In main we are to test the BinarySearchTree class, and the bstSort function.
      */
     public static void main(String[] args) {
-        int[] arr = {5,6,7,4,3,2,1};  //, 16, 11, 25, 24, 30, 33, 29, 3, 2, 19, 36, 22, 28
+        int[] arr = {10,12,5,7,6,11,15,3};  //, 16, 11, 25, 24, 30, 33, 29, 3, 2, 19, 36, 22, 28
         System.out.println("Here is the initial array: \n" + arrayPrinter(arr));
 
         BinarySearchTree newTree = new BinarySearchTree();
@@ -55,14 +55,25 @@ public class Runner {
             newTree.insert(new BSTNode(arr[i]));
         }
 
+        System.out.print("Here is inOrder traversal: ");
+        newTree.inOrder();
+        System.out.println();
+        System.out.print("The size of the tree should be 8, it returns: " + newTree.getSize());
 
-        newTree.getSize();
-        System.out.println("Get size did this: " + newTree.search(5).getSize());
-        System.out.println("Get size did this: " + newTree.search(2).getSize());
-        newTree.delete(newTree.search(1));
-        System.out.println("Get size did this: " + newTree.search(2).getSize());
-        System.out.println("Rank of node with key 2 is: " + newTree.rank(newTree, newTree.search(2)));
-
+        System.out.println();
+        System.out.println("size of node with key 5 should be 4, it returns: " + newTree.search(5).getSize());
+        System.out.println("Size of node with key 10 should be 8, it returns: " + newTree.search(10).getSize());
+        //newTree.delete(newTree.search(1));
+        //System.out.println("After deleting node with 1, size of node with key 2 is: " + newTree.search(2).getSize());
+        System.out.println("Rank of node with key 5 should be 2, it returns: " + newTree.rank(newTree, newTree.search(5)));
+        System.out.print("Here is inOrder traversal: ");
+        newTree.inOrder();
+        System.out.println();
+        System.out.println("Rank of node with key 3 should be 1, it returns: " + newTree.rank(newTree, newTree.search(3)));
+        System.out.print("Here is inOrder traversal: ");
+        System.out.println("Rank of node with key 11 should be 6, it returns: " + newTree.rank(newTree, newTree.search(11)));
+        System.out.print("Here is inOrder traversal: ");
+        newTree.inOrder();
     }//main
 
 
