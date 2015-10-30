@@ -57,6 +57,12 @@ public class BinarySearchTree {
             z = z.getP();
         }
     }//INSERT
+
+
+    public BSTNode select(int order) {
+       return select(root,order);
+    }
+
     /**
      * SELECT(x, i) // get handle to order statistic i in x’s subtree
         r = x.left.size + 1 // r is the rank of node x, within x’s subtree
@@ -67,7 +73,7 @@ public class BinarySearchTree {
         else // look in right subtree for order statistic i - r
             return SELECT(x.right, i - r)
      */
-    public BSTNode select(BSTNode x, int i) {
+    private BSTNode select(BSTNode x, int i) {
         int r;
         if (x.getLeft() != null) {  // check that x actually HAS a left child
             r = x.getLeft().getSize() + 1;

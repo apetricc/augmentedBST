@@ -42,7 +42,13 @@ public class Runner {
         }
         return result;
     }
-
+public static void selectPrinter(BinarySearchTree tree) {
+    String result = "";
+    for (int i = 1; i <= tree.getSize(); i++) {
+        result += tree.select(i) + " ";
+    }
+    System.out.println(result) ;
+}
     /**
      * In main we are to test the BinarySearchTree class, and the bstSort function.
      */
@@ -72,8 +78,16 @@ public class Runner {
         System.out.println("Rank of node with key 3 should be 1, it returns: " + newTree.rank(newTree, newTree.search(3)));
         System.out.print("Here is inOrder traversal: ");
         System.out.println("Rank of node with key 11 should be 6, it returns: " + newTree.rank(newTree, newTree.search(11)));
-        System.out.print("Here is inOrder traversal: ");
+        System.out.println("\nNode with rank one should be 3, node with key 3 returns: " + newTree.rank(newTree, newTree.search(3)));
         newTree.inOrder();
+        System.out.println("\nNode with rank one should be 3, node with key 3 returns: " + newTree.rank(newTree, newTree.search(3)));
+        System.out.println("\nNode with rank two should be 5, node with key 5 returns: " + newTree.rank(newTree, newTree.search(5)));
+        System.out.println("If I try call select on order 1 it should return 3, it returns: " + newTree.select(1));
+        System.out.println("If I call select on order 2 it should return 5, in fact it returns: " + newTree.select(2));
+        System.out.print("\nHere is inOrder traversal, which should match calling select up to tree.size: \n");
+        newTree.inOrder();
+        System.out.print("\nHere is what happens when I call select up to tree.size: \n");
+        selectPrinter(newTree);
     }//main
 
 
