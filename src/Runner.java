@@ -9,6 +9,7 @@
  * The Runner class creates a BinarySearchTree object and runs several tests on it
  * printing useful information to the console.
  */
+import java.util.Arrays;
 public class Runner {
     /**
      * bstSort is a function that is passed an integer array which it inserts
@@ -49,6 +50,15 @@ public static void selectPrinter(BinarySearchTree tree) {
     }
     System.out.println(result) ;
 }
+    public static void rankPrinter(int[] arr, BinarySearchTree tree) {
+        String result = "";
+        int[] newArr = arr.clone();
+        Arrays.sort(newArr);
+        for (int i = 0; i < tree.getSize(); i++) {
+            result += "Rank of node with key " + newArr[i] + " is: " +tree.rank(tree,tree.search(newArr[i])) + " \n";
+        }
+        System.out.println(result);
+    }
     /**
      * In main we are to test the BinarySearchTree class, and the bstSort function.
      */
@@ -88,6 +98,9 @@ public static void selectPrinter(BinarySearchTree tree) {
         newTree.inOrder();
         System.out.print("\nHere is what happens when I call select up to tree.size: \n");
         selectPrinter(newTree);
+        System.out.println("Here is what rank printer does: ");
+        rankPrinter(arr,newTree);
+        System.out.println("Just to prove that sorting the array in the rank printer method didn't sort the actual \narray, but just a copy, here is the array again: " + arrayPrinter(arr));
     }//main
 
 
