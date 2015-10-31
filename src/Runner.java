@@ -43,72 +43,145 @@ public class Runner {
         }
         return result;
     }
-public static void selectPrinter(BinarySearchTree tree) {
+    /**
+public static String selectPrinter(BinarySearchTree tree) {
     String result = "";
     for (int i = 1; i <= tree.getSize(); i++) {
         result += tree.select(i) + " ";
     }
-    System.out.println(result) ;
+    return result;
 }
+     **/
     public static void rankPrinter(int[] arr, BinarySearchTree tree) {
         String result = "";
         int[] newArr = arr.clone();
-        Arrays.sort(newArr);
+        //Arrays.sort(newArr);
         for (int i = 0; i < tree.getSize(); i++) {
-            result += "Rank of node with key " + newArr[i] + " is: " +tree.rank(tree,tree.search(newArr[i])) + " \n";
+            System.out.println("The node with key " + newArr[i] + " is rank: " + tree.rank(tree.search(newArr[i])));
         }
-        System.out.println(result);
     }
+        /**
+         for (int i = 0; i < tree.getSize(); i++) {
+         //System.out.println("Rank of node with key: " + newArr[i] + " is: "+tree.rank(tree,tree.search(newArr[i])));
+         result += "Rank of node with key " + newArr[i] + " is: " +tree.rank(tree,tree.search(newArr[i])) + " \n";
+         }
+
+         return result;
+         //System.out.println(result);
+         }
     /**
      * In main we are to test the BinarySearchTree class, and the bstSort function.
      */
+    /**
+     * 12 points: In main, test your binary search tree with these new queries.
+     Create a BinarySearchTree and insert at least 20 nodes into it.
+     Print the tree's total size (the data field from HW7), delete a handful of elements from the tree,
+     then print the tree's size again. We want to make sure the tree stays correct even after using insert
+     and delete several times.
+     Perform at least 5 select queries, using order statistic in bounds for the tree -- so, don't try to query for
+     order statistic 21 in a tree with 20 nodes. Print the input and result of each query.
+     Perform at least 5 rank queries on node handles already attached to nodes in the tree. (You can first use
+     search on an int "key" to obtain a handle to a node with that "key.") Print the input "key" and result of each.
+     If you did the extra credit, perform at least 5 successful interval queries (overlapping an interval in the tree)
+     and at least 5 unsuccessful interval queries (not overlapping an interval in the tree), and print the input
+     bounds and the output of each query.
+     * @param args
+     */
     public static void main(String[] args) {
-        int[] arr = {10,12,5,7,6,11,15,3};  //, 16, 11, 25, 24, 30, 33, 29, 3, 2, 19, 36, 22, 28
+        int[] arr = {22,12,5,7,6,11,15,3,16,13,25,24,30,33,29,1,2,19,36,28};
         System.out.println("Here is the initial array: \n" + arrayPrinter(arr));
 
         BinarySearchTree newTree = new BinarySearchTree();
         for (int i = 0; i < arr.length; i++) {
             newTree.insert(new BSTNode(arr[i]));
         }
+        System.out.println("Here is the more informative PRE-order traversal printout: ");
+        newTree.preOrder();
+        System.out.print("\nHere is inOrder traversal: ");
+        newTree.inOrder();
+        System.out.println("\nThe rank of node with key 1 is: " + newTree.rank(newTree.search(1)));
+        System.out.println("\nThe rank of node with key 2 is: " + newTree.rank(newTree.search(2)));
+        System.out.println("\nThe rank of node with key 3 is: "+newTree.rank(newTree.search(3)));
+        System.out.println("\nThe rank of node with key 5 is: "+newTree.rank(newTree.search(5)));
+        System.out.println("\nThe rank of node with key 6 is: "+newTree.rank(newTree.search(6)));
+        System.out.println("\nThe rank of node with key 7 is: " + newTree.rank(newTree.search(7)));
+        System.out.println("\nThe rank of node with key 11 is: " + newTree.rank(newTree.search(11)));
+        System.out.println("\nThe rank of node with key 12 is: "+newTree.rank(newTree.search(12)));
+        System.out.println("\nThe rank of node with key 13 is: "+newTree.rank(newTree.search(13)));
+        //System.out.println("Print each node in order of rank: " + selectPrinter(newTree));
+        System.out.println();
+        System.out.print("The size of the tree should be 20, it returns: " + newTree.getSize() + "\n");
+        System.out.println("Deleting node with key 25.");
+        newTree.delete(newTree.search(25));
+        System.out.println("Deleting node with key 36.");
+        newTree.delete(newTree.search(36));
+        System.out.println("Deleting node with key 12.");
+        newTree.delete(newTree.search(12));
 
-        System.out.print("Here is inOrder traversal: ");
-        newTree.inOrder();
-        System.out.println();
-        System.out.print("The size of the tree should be 8, it returns: " + newTree.getSize());
+        System.out.println("\nDeleting node with key 15.");
+        newTree.delete(newTree.search(15));
 
-        System.out.println();
-        System.out.println("size of node with key 5 should be 4, it returns: " + newTree.search(5).getSize());
-        System.out.println("Size of node with key 10 should be 8, it returns: " + newTree.search(10).getSize());
-        //newTree.delete(newTree.search(1));
-        //System.out.println("After deleting node with 1, size of node with key 2 is: " + newTree.search(2).getSize());
-        System.out.println("Rank of node with key 5 should be 2, it returns: " + newTree.rank(newTree, newTree.search(5)));
-        System.out.print("Here is inOrder traversal: ");
-        newTree.inOrder();
-        System.out.println();
-        System.out.println("Rank of node with key 3 should be 1, it returns: " + newTree.rank(newTree, newTree.search(3)));
-        System.out.print("Here is inOrder traversal: ");
-        System.out.println("Rank of node with key 11 should be 6, it returns: " + newTree.rank(newTree, newTree.search(11)));
-        System.out.println("\nNode with rank one should be 3, node with key 3 returns: " + newTree.rank(newTree, newTree.search(3)));
-        newTree.inOrder();
-        System.out.println("\nNode with rank one should be 3, node with key 3 returns: " + newTree.rank(newTree, newTree.search(3)));
-        System.out.println("\nNode with rank two should be 5, node with key 5 returns: " + newTree.rank(newTree, newTree.search(5)));
-        System.out.println("If I try call select on order 1 it should return 3, it returns: " + newTree.select(1));
-        System.out.println("If I call select on order 2 it should return 5, in fact it returns: " + newTree.select(2));
-        System.out.print("\nHere is inOrder traversal, which should match calling select up to tree.size: \n");
-        newTree.inOrder();
-        System.out.print("\nHere is what happens when I call select up to tree.size: \n");
-        selectPrinter(newTree);
-        System.out.println("Here is what rank printer does: ");
-        rankPrinter(arr,newTree);
-        System.out.println("Just to prove that sorting the array in the rank printer method didn't sort the actual \narray, but just a copy, here is the array again: " + arrayPrinter(arr));
+        System.out.println("The size of the tree should now be 16, it returns: " + newTree.getSize());
+        System.out.println("Here is a pre order traversal now that things have moved around:");
+        newTree.preOrder();
+        //System.out.println("If I try calling select on order 1 it should return 1, it returns: " + newTree.select(1));
+        //System.out.println("If I call select on order 7 it should return 11, in fact it returns: " + newTree.select(7));
+
+        System.out.println("\nNode with key 2 has rank: " + newTree.rank(newTree.search(2)));
+        System.out.println("\nCall select on order 2: " + newTree.select(2));
+        System.out.println("\nCall select on order 1: " + newTree.select(1));
+        System.out.println("Node with 11 has rank: " + newTree.rank(newTree.search(11)));
+
+  /*
+        System.out.println("\nNode with key 3 has rank: " +newTree.rank(newTree,newTree.search(3)));
+        System.out.println("\nNode with key 5 has rank: " +newTree.rank(newTree,newTree.search(5)));
+        System.out.println("\nNode with key 6 has rank: " +newTree.rank(newTree,newTree.search(6)));
+        System.out.println("\nNode with key 7 has rank: " +newTree.rank(newTree,newTree.search(7)));
+        System.out.println("\nNode with key 11 has rank: " +newTree.rank(newTree,newTree.search(11)));
+        System.out.println("\nNode with key 12 has rank: " +newTree.rank(newTree,newTree.search(12)));
+        //rankPrinter(arr,newTree);
+*/
+
     }//main
 
 
 }
 
 /**
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
         System.out.println("Here is the pre-order traversal: ");
-        newTree.preOrder();
+
+
+ public static String rankPrinter(int[] arr, BinarySearchTree tree) {
+ String result = "";
+ int[] newArr = arr.clone();
+ //Arrays.sort(newArr);
+ for (int i = 0; i < tree.getSize(); i++) {
+ System.out.println("The node with key " + newArr[i] + " is rank: " + tree.rank(tree, tree.search(newArr[i])));
+ }
+ /**
+ for (int i = 0; i < tree.getSize(); i++) {
+ //System.out.println("Rank of node with key: " + newArr[i] + " is: "+tree.rank(tree,tree.search(newArr[i])));
+ result += "Rank of node with key " + newArr[i] + " is: " +tree.rank(tree,tree.search(newArr[i])) + " \n";
+ }
+
+return result;
+        //System.out.println(result);
+        }
+
+
+
+
+
+ newTree.preOrder();
         System.out.println("\nHere is the in-order traversal: ");
         newTree.inOrder();
         System.out.println("\nHere is the post-order traversal: ");
@@ -194,6 +267,27 @@ public static void selectPrinter(BinarySearchTree tree) {
         System.out.println("Here is the initial array: \n" + arrayPrinter(arr6));
         System.out.print("Here is the array after bstSort: \n");
         bstSort(arr6);
+
+
+ //here's my rank printer using the sort call:
+ public static String rankPrinter(int[] arr, BinarySearchTree tree) {
+ String result = "";
+ int[] newArr = arr.clone();
+ Arrays.sort(newArr);
+ for (int i = 0; i < tree.getSize(); i++) {
+ result += "Rank of node with key " + newArr[i] + " is: "
+ +tree.rank(tree,tree.search(newArr[i])) + " \n";
+
+ }
+ return result;
+ }
+
+
+
+
+
+
+
 
 
 

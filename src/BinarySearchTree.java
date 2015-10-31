@@ -60,10 +60,12 @@ public class BinarySearchTree {
 
 
     public BSTNode select(int order) {
-       return select(root,order);
+        return select(root,order);
     }
 
-    /**
+    /** Tried to make a public and private version, but maybe that's the bug
+     *
+
      * SELECT(x, i) // get handle to order statistic i in x’s subtree
         r = x.left.size + 1 // r is the rank of node x, within x’s subtree
         if i == r
@@ -77,7 +79,8 @@ public class BinarySearchTree {
         int r;
         if (x.getLeft() != null) {  // check that x actually HAS a left child
             r = x.getLeft().getSize() + 1;
-        } else r = 1;   // if x doesn't have a left child it should become ??  1? need to check what select is supposed to do
+        } //else if (x.getRight() != null) r = x.getRight().getSize() - 1;  //stab in the dark
+            else r = x.getSize();   // if x doesn't have a left child what is it's order stat?
         if (i == r) return x;
         else if (i < r) return select(x.getLeft(), i);
         else return select(x.getRight(), i - r);
@@ -94,16 +97,18 @@ public class BinarySearchTree {
  *          y = y.p
  *      }
  *  */
-    public int rank(BinarySearchTree T, BSTNode x) {
+    public int rank(BSTNode x) {
         int r;
 
         if (x.getLeft() != null) { //if x has left child
             r = x.getLeft().getSize() + 1;
         } else r = 1;  // if x has no left child
         BSTNode y = x;
-        while (y != T.root) {
+        while (y != root) {
             if (y == y.getP().getRight()) {
-                r = r + y.getP().getLeft().getSize() + 1;
+               if (y.getP().getLeft() != null) {
+                    r = r + y.getP().getLeft().getSize() + 1;
+               } else r++;
             }
         y = y.getP();
         }
@@ -151,7 +156,8 @@ public class BinarySearchTree {
             if (y.getP() != z) {
                 transplant(y, y.getRight());
                 y.setRight(z.getRight());
-                y.getP().setRight(y);
+                y.getRight().setP(y);
+                //y.getP().setRight(y);
                 // size--;
             }
             transplant(z, y);
