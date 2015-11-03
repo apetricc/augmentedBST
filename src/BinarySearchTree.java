@@ -143,32 +143,34 @@ public class BinarySearchTree {
      * @param z The node to be deleted.
      */
     public void delete(BSTNode z) {
+        BSTNode q;
         if (z.getLeft() == null) {
             transplant(z, z.getRight());
-            //size--;
+            q = z.getP();
         }
         else if (z.getRight() == null) {
             transplant(z, z.getLeft());
-            //size--;
+            q = z.getP();
         }
         else {
             BSTNode y = minimum(z.getRight());
             if (y.getP() != z) {
+                q = y.getP();
                 transplant(y, y.getRight());
                 y.setRight(z.getRight());
                 y.getRight().setP(y);
-                //y.getP().setRight(y);
-                // size--;
+            } else {
+                q = y;
+                transplant(z, y);
+                y.setLeft(z.getLeft());
+                y.getLeft().setP(y);
             }
-            transplant(z, y);
-            y.setLeft(z.getLeft());
-            //y.getP().setLeft(y);
-            y.getLeft().setP(y);
-
         }
-        while (z != null) {
-            z.setSize(z.getSize() - 1);
-            z = z.getP();
+        while (q != null) {
+            //z.setSize(z.getSize() - 1);
+            //z = z.getP();
+            q.setSize(z.getLeft().getSize() + z.getRight().getSize() + 1 );
+            q = q.getP();
         }
         size--;
     }

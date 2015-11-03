@@ -124,23 +124,24 @@ public static String selectPrinter(BinarySearchTree tree) {
         System.out.println("The size of the tree should now be 16, it returns: " + newTree.getSize());
         System.out.println("Here is a pre order traversal now that things have moved around:");
         newTree.preOrder();
-        //System.out.println("If I try calling select on order 1 it should return 1, it returns: " + newTree.select(1));
-        //System.out.println("If I call select on order 7 it should return 11, in fact it returns: " + newTree.select(7));
+        System.out.println("If I try calling select on order 1 it should return 1, it returns: " + newTree.select(1));
+        System.out.println("If I call select on order 7 it should return 11, in fact it returns: " + newTree.select(7));
 
         System.out.println("\nNode with key 2 has rank: " + newTree.rank(newTree.search(2)));
         System.out.println("\nCall select on order 2: " + newTree.select(2));
         System.out.println("\nCall select on order 1: " + newTree.select(1));
         System.out.println("Node with 11 has rank: " + newTree.rank(newTree.search(11)));
+        newTree.inOrder();
 
-  /*
-        System.out.println("\nNode with key 3 has rank: " +newTree.rank(newTree,newTree.search(3)));
-        System.out.println("\nNode with key 5 has rank: " +newTree.rank(newTree,newTree.search(5)));
-        System.out.println("\nNode with key 6 has rank: " +newTree.rank(newTree,newTree.search(6)));
-        System.out.println("\nNode with key 7 has rank: " +newTree.rank(newTree,newTree.search(7)));
-        System.out.println("\nNode with key 11 has rank: " +newTree.rank(newTree,newTree.search(11)));
-        System.out.println("\nNode with key 12 has rank: " +newTree.rank(newTree,newTree.search(12)));
+
+        System.out.println("\nNode with key 3 has rank: " +newTree.rank(newTree.search(3)));
+        System.out.println("\nNode with key 5 has rank: " +newTree.rank(newTree.search(5)));
+        System.out.println("\nNode with key 6 has rank: " +newTree.rank(newTree.search(6)));
+        System.out.println("\nNode with key 7 has rank: " +newTree.rank(newTree.search(7)));
+        System.out.println("\nNode with key 11 has rank: " +newTree.rank(newTree.search(11)));
+        System.out.println("\nNode with key 12 has rank: " +newTree.rank(newTree.search(12)));
         //rankPrinter(arr,newTree);
-*/
+
 
     }//main
 
