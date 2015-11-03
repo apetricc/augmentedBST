@@ -20,8 +20,8 @@
  */
 public class BSTNode {
     BSTNode p, left, right;
-    int key;
-    int size;
+    private int key;
+    private int size;
 
     /**
      * The BSTNode constructor creates and empty node of a binary search tree with all handles set to null.

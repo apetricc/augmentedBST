@@ -20,7 +20,6 @@ public class BinarySearchTree {
         root = null;
         size = 0;
     }
-
     /**
      * insert inserts a node into the tree.
      * @param z the node to be inserted
@@ -46,60 +45,41 @@ public class BinarySearchTree {
             y.setRight(z);
             size++;
         }
-        /**
-         * Insert and delete will need to be modified to recompute sizes as indicated in the slides/textbook.
-         For insert, you'll need to increment sizes of nodes on the path to the root (including the inserted node)
-         by 1. The newly inserted node will end up with a subtree size of 1 after insertion, since it's a leaf.
-         Implement select and rank queries as in the slides/textbook. Keep in mind the pseudocode is not object oriented.
-         */
         while (z != null) {
             z.setSize(z.getSize() + 1);
             z = z.getP();
         }
     }//INSERT
-
-
-    public BSTNode select(int order) {
+    /**
+     * the select method returns the node of the requested rank
+     * @param order the order node to find
+     * @return the node of the requested order
+     */
+     public BSTNode select(int order) {
         return select(root,order);
     }
-
-    /** Tried to make a public and private version, but maybe that's the bug
-     *
-
-     * SELECT(x, i) // get handle to order statistic i in x’s subtree
-        r = x.left.size + 1 // r is the rank of node x, within x’s subtree
-        if i == r
-            return x
-        elseif i < r // look in the left subtree
-            return SELECT(x.left, i)
-        else // look in right subtree for order statistic i - r
-            return SELECT(x.right, i - r)
+    /**
+     * the select method returns the node of given rank
+     * @param x the node to start looking for the node of the given order at
+     * @param i the order to select a node of
+     * @return the node of the requested order
      */
     private BSTNode select(BSTNode x, int i) {
         int r;
-        if (x.getLeft() != null) {  // check that x actually HAS a left child
+        if (x.getLeft() != null) {
             r = x.getLeft().getSize() + 1;
-        } //else if (x.getRight() != null) r = x.getRight().getSize() - 1;  //stab in the dark
-            else r = x.getSize();   // if x doesn't have a left child what is it's order stat?
+        } else r = 1;
         if (i == r) return x;
         else if (i < r) return select(x.getLeft(), i);
         else return select(x.getRight(), i - r);
     }
-
-/**
- * RANK(T, x) // find the rank of node x in tree T.   x is a handle.
- *      r = x.left.size + 1 // rank of x in x's subtree
- *      y = x  // y starts at x, and goes up a path towards the root
- *      while (y != T.root){ // walk a path from x to the root
- *          if (y == y.p.right) { // if y is a right child
- *              r = r + y.p.left.size + 1  // account for y's new left subtree
- *          }
- *          y = y.p
- *      }
- *  */
+    /**
+     * the rank method returns the rank of the node given
+     * @param x the node to find the rank of
+     * @return the rank of the node
+     */
     public int rank(BSTNode x) {
         int r;
-
         if (x.getLeft() != null) { //if x has left child
             r = x.getLeft().getSize() + 1;
         } else r = 1;  // if x has no left child
@@ -114,10 +94,6 @@ public class BinarySearchTree {
         }
         return r;
     }
-
-
-
-
     /**
      * transplant moves a node from one location in the tree to another
      * as part of other operations--this is a helper method.
@@ -136,7 +112,6 @@ public class BinarySearchTree {
             v.setP(u.getP());
         }
     }//TRANSPLANT
-
     /**
      * delete removes a node from the binary search tree, maintaining the
      * binary search tree property, and decreasing the size of the tree.
@@ -159,17 +134,20 @@ public class BinarySearchTree {
                 transplant(y, y.getRight());
                 y.setRight(z.getRight());
                 y.getRight().setP(y);
-            } else {
+            }
                 q = y;
                 transplant(z, y);
                 y.setLeft(z.getLeft());
                 y.getLeft().setP(y);
-            }
+
         }
         while (q != null) {
-            //z.setSize(z.getSize() - 1);
-            //z = z.getP();
-            q.setSize(z.getLeft().getSize() + z.getRight().getSize() + 1 );
+            if (q.getRight() == null && q.getLeft() == null) q.setSize(1);
+            if (q.getRight() == null && q.getLeft() != null) q.setSize(q.getLeft().getSize() + 1);
+            if (q.getRight() != null && q.getLeft() == null) q.setSize(q.getRight().getSize() + 1);
+            if (q.getRight() != null && q.getLeft() != null) {
+                q.setSize(q.getLeft().getSize() + q.getRight().getSize() + 1 );
+            }
             q = q.getP();
         }
         size--;
