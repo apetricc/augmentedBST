@@ -1,30 +1,28 @@
 /**
- * Andrew Petriccione Csci 333 Fall 2015 Professor Whitley
- * Assignment: Binary Search Trees
- * The point of this assignment is to implement a binary search tree
- * and the sorting algorithm we discussed for it.
+ * Andrew Petriccione 
+ * Csci 333 Fall 2015 
+ * Professor Whitley 
+ * Homework 8: Augmented Binary Search Trees 
+ * The point of this assignment is to implement a binary
+ * search tree and the sorting algorithm we discussed for it, and then augment
+ * the Binary Search Tree to include rank and select functions
  */
-
 /**
- * The BSTNode class represents one node of a binary search tree. It has data fields for
- * the parent, left child, right child, and the key.
+ * The BSTNode class represents one node of a binary search tree. It has data
+ * fields for the parent, left child, right child, key, and a field size for the
+ * number of nodes in the subtree.
  */
+//package augmentedbst;
 
-/**
- * The BSTNode class will have a new data field size, for the number of nodes in the subtree. The BSTNode
- * constructor should set the size to 0.
- Insert and delete will need to be modified to recompute sizes as indicated in the slides/textbook.
- For insert, you'll need to increment sizes of nodes on the path to the root (including the inserted node)
- by 1. The newly inserted node will end up with a subtree size of 1 after insertion, since it's a leaf.
- Implement select and rank queries as in the slides/textbook. Keep in mind the pseudocode is not object oriented.
- */
 public class BSTNode {
+
     BSTNode p, left, right;
     private int key;
     private int size;
 
     /**
-     * The BSTNode constructor creates and empty node of a binary search tree with all handles set to null.
+     * The BSTNode constructor creates and empty node of a binary search tree
+     * with all handles set to null.
      *
      * @param key The key for the node being created.
      */
@@ -99,10 +97,20 @@ public class BSTNode {
         return key;
     }
 
+    /**
+     * getSize returns the number of nodes in the subtree
+     *
+     * @return the number of nodes in the subtree
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * setSize sets the size of a node's subtree
+     *
+     * @param size the size to set the subtree to
+     */
     public void setSize(int size) {
         this.size = size;
     }
